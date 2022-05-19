@@ -1,0 +1,29 @@
+2022-03-04 12:49:26,066 - teradata.udaexec - INFO - Initializing UdaExec...
+2022-03-04 12:49:26,066 - teradata.udaexec - INFO - Reading config files: ['D:\\etc\\udaexec.ini: Not Found', 'C:\\Users\\usman.altaf\\udaexec.ini: Not Found', 'D:\\Python\\QOS Daily Dashboard\\udaexec.ini: Not Found']
+2022-03-04 12:49:26,067 - teradata.udaexec - INFO - Found run number file: "D:\Python\QOS Daily Dashboard\.runNumber"
+2022-03-04 12:49:26,067 - teradata.udaexec - INFO - Cleaning up log files older than 90 days.
+2022-03-04 12:49:26,067 - teradata.udaexec - INFO - Removed 0 log files.
+2022-03-04 12:49:26,068 - teradata.udaexec - INFO - Checkpoint file not found: D:\Python\QOS Daily Dashboard\test.checkpoint
+2022-03-04 12:49:26,069 - teradata.udaexec - INFO - No previous checkpoint found, executing from beginning...
+2022-03-04 12:49:26,069 - teradata.udaexec - INFO - Execution Details:
+/********************************************************************************
+ * Application Name: test
+ *          Version: 1.0
+ *       Run Number: 20220304124926-3
+ *             Host: ISB-MKT-USMANA
+ *         Platform: Windows-10-10.0.22000-SP0
+ *          OS User: usman.altaf
+ *   Python Version: 3.7.2
+ *  Python Compiler: MSC v.1916 64 bit (AMD64)
+ *     Python Build: ('tags/v3.7.2:9a3ffc0492', 'Dec 23 2018 23:09:28')
+ *  UdaExec Version: 15.10.0.21
+ *     Program Name: QOS_Daily_Report.py
+ *      Working Dir: D:\Python\QOS Daily Dashboard
+ *          Log Dir: D:\Python\QOS Daily Dashboard\logs
+ *         Log File: D:\Python\QOS Daily Dashboard\logs\test.20220304124926-3.log
+ *     Config Files: ['D:\\etc\\udaexec.ini: Not Found', 'C:\\Users\\usman.altaf\\udaexec.ini: Not Found', 'D:\\Python\\QOS Daily Dashboard\\udaexec.ini: Not Found']
+ *      Query Bands: ApplicationName=test;Version=1.0;JobID=20220304124926-3;ClientUser=usman.altaf;Production=False;udaAppLogFile=D:\Python\QOS Daily Dashboard\logs\test.20220304124926-3.log;UtilityName=PyTd;UtilityVersion=15.10.0.21
+********************************************************************************/
+2022-03-04 12:49:26,069 - teradata.udaexec - INFO - Creating connection: {'method': 'odbc', 'system': 'pam.zong.com.pk', 'username': 'usman_altaf', 'password': 'XXXXXX', 'driver': 'Teradata Database ODBC Driver 16.20'}
+2022-03-04 12:49:26,074 - teradata.tdodbc - INFO - Available drivers: SQL Server, Microsoft Access Driver (*.mdb, *.accdb), Microsoft Excel Driver (*.xls, *.xlsx, *.xlsm, *.xlsb), Microsoft Access Text Driver (*.txt, *.csv), Teradata Database ODBC Driver 16.20, Teradata 7.1 DB2 Wire Protocol, Teradata 7.1 Oracle, Teradata 8.0 Oracle Wire Protocol, Teradata 7.1 SQL Server Legacy Wire Protocol, Teradata 7.1 SQL Server Wire Protocol, Teradata 7.1 MySQL Wire Protocol, Teradata 7.1 PostgreSQL Wire Protocol, PostgreSQL ANSI(x64), PostgreSQL Unicode(x64), ODBC Driver 17 for SQL Server
+2022-03-04 12:49:26,955 - teradata.udaexec - INFO - Connection successful. Duration: 0.886 seconds. Details: {'method': 'odbc', 'system': 'pam.zong.com.pk', 'username': 'usman_altaf', 'password': 'XXXXXX', 'driver': 'Teradata Database ODBC Driver 16.20'}

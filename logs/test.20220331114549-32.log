@@ -1,0 +1,65 @@
+2022-03-31 11:45:49,349 - teradata.udaexec - INFO - Initializing UdaExec...
+2022-03-31 11:45:49,349 - teradata.udaexec - INFO - Reading config files: ['D:\\etc\\udaexec.ini: Not Found', 'C:\\Users\\usman.altaf\\udaexec.ini: Not Found', 'D:\\Python\\QOS Daily Dashboard\\udaexec.ini: Not Found']
+2022-03-31 11:45:49,349 - teradata.udaexec - INFO - Found run number file: "D:\Python\QOS Daily Dashboard\.runNumber"
+2022-03-31 11:45:49,349 - teradata.udaexec - INFO - Cleaning up log files older than 90 days.
+2022-03-31 11:45:49,349 - teradata.udaexec - INFO - Removed 0 log files.
+2022-03-31 11:45:49,350 - teradata.udaexec - INFO - Checkpoint file not found: D:\Python\QOS Daily Dashboard\test.checkpoint
+2022-03-31 11:45:49,350 - teradata.udaexec - INFO - No previous checkpoint found, executing from beginning...
+2022-03-31 11:45:49,350 - teradata.udaexec - INFO - Execution Details:
+/********************************************************************************
+ * Application Name: test
+ *          Version: 1.0
+ *       Run Number: 20220331114549-32
+ *             Host: ISB-MKT-USMANA
+ *         Platform: Windows-10-10.0.22000-SP0
+ *          OS User: usman.altaf
+ *   Python Version: 3.7.2
+ *  Python Compiler: MSC v.1916 64 bit (AMD64)
+ *     Python Build: ('tags/v3.7.2:9a3ffc0492', 'Dec 23 2018 23:09:28')
+ *  UdaExec Version: 15.10.0.21
+ *     Program Name: QOS_Daily_Report.py
+ *      Working Dir: D:\Python\QOS Daily Dashboard
+ *          Log Dir: D:\Python\QOS Daily Dashboard\logs
+ *         Log File: D:\Python\QOS Daily Dashboard\logs\test.20220331114549-32.log
+ *     Config Files: ['D:\\etc\\udaexec.ini: Not Found', 'C:\\Users\\usman.altaf\\udaexec.ini: Not Found', 'D:\\Python\\QOS Daily Dashboard\\udaexec.ini: Not Found']
+ *      Query Bands: ApplicationName=test;Version=1.0;JobID=20220331114549-32;ClientUser=usman.altaf;Production=False;udaAppLogFile=D:\Python\QOS Daily Dashboard\logs\test.20220331114549-32.log;UtilityName=PyTd;UtilityVersion=15.10.0.21
+********************************************************************************/
+2022-03-31 11:45:49,350 - teradata.udaexec - INFO - Creating connection: {'method': 'odbc', 'system': 'pam.zong.com.pk', 'username': 'usman_altaf', 'password': 'XXXXXX', 'driver': 'Teradata Database ODBC Driver 16.20'}
+2022-03-31 11:45:49,356 - teradata.tdodbc - INFO - Available drivers: SQL Server, Microsoft Access Driver (*.mdb, *.accdb), Microsoft Excel Driver (*.xls, *.xlsx, *.xlsm, *.xlsb), Microsoft Access Text Driver (*.txt, *.csv), Teradata Database ODBC Driver 16.20, Teradata 7.1 DB2 Wire Protocol, Teradata 7.1 Oracle, Teradata 8.0 Oracle Wire Protocol, Teradata 7.1 SQL Server Legacy Wire Protocol, Teradata 7.1 SQL Server Wire Protocol, Teradata 7.1 MySQL Wire Protocol, Teradata 7.1 PostgreSQL Wire Protocol, PostgreSQL ANSI(x64), PostgreSQL Unicode(x64), ODBC Driver 17 for SQL Server
+2022-03-31 11:45:50,121 - teradata.udaexec - INFO - Connection successful. Duration: 0.771 seconds. Details: {'method': 'odbc', 'system': 'pam.zong.com.pk', 'username': 'usman_altaf', 'password': 'XXXXXX', 'driver': 'Teradata Database ODBC Driver 16.20'}
+2022-03-31 11:47:02,318 - teradata.udaexec - INFO - Query Successful. Duration: 72.194 seconds, Rows: 1653142, Query: SELECT
+    BB.SBSCRPN_EFF_DT AS SBSCRPN_EFF_DT,
+    CC.BVS_DEVICE_ID,
+    --CC.LATITUDE,
+    --CC.LONGITUDE,
+    DD.RET_ID AS Retailer_ID,
+    DD.CHNL_NUM AS Franchise_ID,
+    EE.GRID_ID,
+    BB.PORT_IN_IND,
+    DD.CHNL_RGN_NAME AS Sales_Region
+        ,CASE WHEN CHNL_RGN_NAME	IN ('Central I','Central IV','Central V') THEN 'CENTRAL-A'
+                    WHEN CHNL_RGN_NAME	IN ('Central II','Central III') THEN 'CENTRAL-B'
+                    WHEN CHNL_RGN_NAME	IN ('North I','North II','North III') THEN 'NORTH'
+                    WHEN CHNL_RGN_NAME	IN ('South I','SOUTH II','SOUTH III','SOUTH IV') THEN 'SOUTH'
+                    ELSE 'NULL' END SALES_REGION_GROUP
+    ,Count(DISTINCT CASE WHEN FLAG= 1 THEN AA.sbscrpn_key ELSE NULL END ) LOW_Q_SUBS
+        ,Count(DISTINCT CASE WHEN FLAG= 0 THEN AA.sbscrpn_key ELSE NULL END ) HIGH_Q_SUBS    
+        ,Count(DISTINCT AA.sbscrpn_key) TOTAL_SALES
+
+    FROM DT_SPSS.QOS_1STMONTH_PRED AA -- QOS predictions against SBSCRPN_KEY
+    INNER JOIN DT_SDMVW.DIM_SBSCRPN BB -- SBSCRPN_EFF_DT
+    ON AA.SBSCRPN_KEY = BB.SBSCRPN_KEY
+
+    LEFT JOIN DT_SDMVW.FCT_SALES CC
+    ON AA.SBSCRPN_KEY = CC.SBSCRPN_KEY
+
+    LEFT JOIN DT_SDMVW.DIM_CHNL_SND DD -- Franchise_ID, Sales_Region, Retailer_ID
+    ON CC.SL_CHNL_KEY = DD.CHNL_KEY
+
+    LEFT JOIN (SEL * FROM DT_SDMVW.DIM_GRID QUALIFY Row_Number() Over(PARTITION BY Franchise_Id ORDER BY EnD_Date DESC)=1) EE -- GRID_ID
+    ON EE.Franchise_id = DD.CHNL_NUM
+    AND Start_date <= BB.SBSCRPN_EFF_DT
+    AND End_date > BB.SBSCRPN_EFF_DT
+    WHERE BB.SBSCRPN_BIL_TYPE = 2 AND BB.SBSCRPN_EFF_DT BETWEEN   '2021-12-01' AND DATE-7
+    GROUP BY 1,2,3,4,5,6,7;
+2022-03-31 12:05:21,618 - teradata.udaexec - INFO - UdaExec exiting.

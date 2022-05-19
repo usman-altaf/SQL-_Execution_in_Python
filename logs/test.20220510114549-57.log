@@ -1,0 +1,49 @@
+2022-05-10 11:45:49,640 - teradata.udaexec - INFO - Initializing UdaExec...
+2022-05-10 11:45:49,640 - teradata.udaexec - INFO - Reading config files: ['D:\\etc\\udaexec.ini: Not Found', 'C:\\Users\\usman.altaf\\udaexec.ini: Not Found', 'D:\\Python\\QOS Daily Dashboard\\udaexec.ini: Not Found']
+2022-05-10 11:45:49,640 - teradata.udaexec - INFO - Found run number file: "D:\Python\QOS Daily Dashboard\.runNumber"
+2022-05-10 11:45:49,640 - teradata.udaexec - INFO - Cleaning up log files older than 90 days.
+2022-05-10 11:45:49,640 - teradata.udaexec - INFO - Removed 0 log files.
+2022-05-10 11:45:49,644 - teradata.udaexec - INFO - Checkpoint file not found: D:\Python\QOS Daily Dashboard\test.checkpoint
+2022-05-10 11:45:49,644 - teradata.udaexec - INFO - No previous checkpoint found, executing from beginning...
+2022-05-10 11:45:49,645 - teradata.udaexec - INFO - Execution Details:
+/********************************************************************************
+ * Application Name: test
+ *          Version: 1.0
+ *       Run Number: 20220510114549-57
+ *             Host: ISB-MKT-USMANA
+ *         Platform: Windows-10-10.0.22000-SP0
+ *          OS User: usman.altaf
+ *   Python Version: 3.7.2
+ *  Python Compiler: MSC v.1916 64 bit (AMD64)
+ *     Python Build: ('tags/v3.7.2:9a3ffc0492', 'Dec 23 2018 23:09:28')
+ *  UdaExec Version: 15.10.0.21
+ *     Program Name: QOS_Daily_Report.py
+ *      Working Dir: D:\Python\QOS Daily Dashboard
+ *          Log Dir: D:\Python\QOS Daily Dashboard\logs
+ *         Log File: D:\Python\QOS Daily Dashboard\logs\test.20220510114549-57.log
+ *     Config Files: ['D:\\etc\\udaexec.ini: Not Found', 'C:\\Users\\usman.altaf\\udaexec.ini: Not Found', 'D:\\Python\\QOS Daily Dashboard\\udaexec.ini: Not Found']
+ *      Query Bands: ApplicationName=test;Version=1.0;JobID=20220510114549-57;ClientUser=usman.altaf;Production=False;udaAppLogFile=D:\Python\QOS Daily Dashboard\logs\test.20220510114549-57.log;UtilityName=PyTd;UtilityVersion=15.10.0.21
+********************************************************************************/
+2022-05-10 11:45:49,645 - teradata.udaexec - INFO - Creating connection: {'method': 'odbc', 'system': 'pam.zong.com.pk', 'username': 'usman_altaf', 'password': 'XXXXXX', 'driver': 'Teradata Database ODBC Driver 16.20'}
+2022-05-10 11:45:49,657 - teradata.tdodbc - INFO - Available drivers: SQL Server, Microsoft Access Driver (*.mdb, *.accdb), Microsoft Excel Driver (*.xls, *.xlsx, *.xlsm, *.xlsb), Microsoft Access Text Driver (*.txt, *.csv), Teradata Database ODBC Driver 16.20, Teradata 7.1 DB2 Wire Protocol, Teradata 7.1 Oracle, Teradata 8.0 Oracle Wire Protocol, Teradata 7.1 SQL Server Legacy Wire Protocol, Teradata 7.1 SQL Server Wire Protocol, Teradata 7.1 MySQL Wire Protocol, Teradata 7.1 PostgreSQL Wire Protocol, PostgreSQL ANSI(x64), PostgreSQL Unicode(x64), ODBC Driver 17 for SQL Server
+2022-05-10 11:45:50,251 - teradata.udaexec - ERROR - Unable to create connection: {'method': 'odbc', 'system': 'pam.zong.com.pk', 'username': 'usman_altaf', 'password': 'XXXXXX', 'driver': 'Teradata Database ODBC Driver 16.20'}
+Traceback (most recent call last):
+  File "C:\Users\usman.altaf\AppData\Local\Programs\Python\Python37\lib\site-packages\teradata\udaexec.py", line 183, in connect
+    **args))
+  File "C:\Users\usman.altaf\AppData\Local\Programs\Python\Python37\lib\site-packages\teradata\tdodbc.py", line 454, in __init__
+    checkStatus(rc, hDbc=self.hDbc, method="SQLDriverConnectW")
+  File "C:\Users\usman.altaf\AppData\Local\Programs\Python\Python37\lib\site-packages\teradata\tdodbc.py", line 231, in checkStatus
+    raise DatabaseError(i[2], u"[{}] {}".format(i[0], msg), i[0])
+teradata.api.DatabaseError: (210, '[28000] [Teradata][ODBC Teradata Driver][Teradata Database] (210) The UserId, Password or Account is invalid. FailCode = -8017')
+2022-05-10 11:45:50,268 - teradata.udaexec - ERROR - Uncaught exception
+Traceback (most recent call last):
+  File "QOS_Daily_Report.py", line 32, in <module>
+    password=password, driver="Teradata Database ODBC Driver 16.20") as connect:
+  File "C:\Users\usman.altaf\AppData\Local\Programs\Python\Python37\lib\site-packages\teradata\udaexec.py", line 183, in connect
+    **args))
+  File "C:\Users\usman.altaf\AppData\Local\Programs\Python\Python37\lib\site-packages\teradata\tdodbc.py", line 454, in __init__
+    checkStatus(rc, hDbc=self.hDbc, method="SQLDriverConnectW")
+  File "C:\Users\usman.altaf\AppData\Local\Programs\Python\Python37\lib\site-packages\teradata\tdodbc.py", line 231, in checkStatus
+    raise DatabaseError(i[2], u"[{}] {}".format(i[0], msg), i[0])
+teradata.api.DatabaseError: (210, '[28000] [Teradata][ODBC Teradata Driver][Teradata Database] (210) The UserId, Password or Account is invalid. FailCode = -8017')
+2022-05-10 11:45:50,296 - teradata.udaexec - INFO - UdaExec exiting.
